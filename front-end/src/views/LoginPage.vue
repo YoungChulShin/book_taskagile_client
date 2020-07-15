@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div>
+    <h1>TestAgile</h1>
   </div>
 </template>
 
@@ -9,11 +9,10 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 @Component
-export default class App extends Vue {
+export default class LoginPage extends Vue {
+  // data
+  message = 'hello';
 
+  // methods
 }
 </script>
-
-<style scoped>
-
-</style>
