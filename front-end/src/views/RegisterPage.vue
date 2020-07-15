@@ -6,7 +6,7 @@
           <img class="logo" src="/static/images/logo.png">
           <div class="tagline">Open source task management tool</div>
         </div>
-        <form>
+        <form class="register-form">
           <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username"/>
@@ -39,9 +39,16 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+declare interface FormData {
+  username: string;
+  emailAddress: string;
+  password: string;
+}
+
 @Component
 export default class RegisterPage extends Vue {
   // data
+
 
   // methods
 }
