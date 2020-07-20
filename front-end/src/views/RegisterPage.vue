@@ -7,18 +7,18 @@
           <div class="tagline">Open source task management tool</div>
         </div>
         <form @submit.prevent="submitForm">
-          <!-- <div v-show="errorMessage" class="alert alert-danger failed">{{ errorMessage }}</div> -->
+          <div v-show="errorMessage" class="alert alert-danger failed">{{errorMessage}}</div>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username">
+            <input type="text" class="form-control" id="username" v-model="form.username">
           </div>
           <div class="form-group">
             <label for="emailAddress">Email address</label>
-            <input type="email" class="form-control" id="emailAddress">
+            <input type="email" class="form-control" id="emailAddress" v-model="form.emailAddress">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="password" v-model="form.password">
           </div>
           <button type="submit" class="btn btn-primary btn-block">Create account</button>
         </form>
@@ -38,10 +38,27 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
+import {RegisterForm} from '@/model';
+import RegistrationService from '@/service/registration';
+import { AxiosError } from 'axios';
 
 @Component
 export default class RegisterPage extends Vue {
-    
+    form: RegisterForm = {
+        username: '',
+        emailAddress: '',
+        password: '',
+    }
+
+    errorMessage: string = '';
+
+    submitForm() {
+        RegistrationService.register(this.form).then(() => {
+            this.$router.push({ name: 'LoginPage' });
+        }).catch((error: AxiosError) => {
+            this.errorMessage = 'Failed to register user. Reason: ' + (error.message ? error.message : 'Unknown') + '.';
+        })
+    }
 }
 </script>
 
