@@ -38,9 +38,9 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-import {RegisterForm} from '@/model';
+import {RegisterForm} from '@/model/registration';
 import RegistrationService from '@/service/registration';
-import { AxiosError } from 'axios';
+import {AxiosError} from 'axios';
 
 @Component
 export default class RegisterPage extends Vue {
