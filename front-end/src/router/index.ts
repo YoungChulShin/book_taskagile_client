@@ -1,10 +1,16 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../views/Home.vue';
+import LoginPage from '@/views/LoginPage.vue';
 
 Vue.use(VueRouter);
 
-const routes: RouteConfig[] = [];
+const routes: RouteConfig[] = [
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: LoginPage,
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
