@@ -36,29 +36,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import {Vue, Component} from 'vue-property-decorator';
-import {RegisterForm} from '@/model/registration';
-import RegistrationService from '@/service/registration';
-import {AxiosError} from 'axios';
-
-@Component
-export default class RegisterPage extends Vue {
-    form: RegisterForm = {
+<script>
+export default {
+  name: 'RegisterPage',
+  data: function () {
+    return {
+      form: {
         username: '',
         emailAddress: '',
-        password: '',
+        password: ''
+      }
     }
-
-    errorMessage: string = '';
-
-    submitForm() {
-        RegistrationService.register(this.form).then(() => {
-            this.$router.push({ name: 'LoginPage' });
-        }).catch((error: AxiosError) => {
-            this.errorMessage = 'Failed to register user. Reason: ' + (error.message ? error.message : 'Unknown') + '.';
-        })
-    }
+  }
 }
 </script>
 
@@ -79,4 +68,3 @@ export default class RegisterPage extends Vue {
     margin-top: 50px;
 }
 </style>
-
