@@ -82,6 +82,5 @@ export default {
 <style lang="scss" scoped>
 .links {
   margin: 30px 0 50px 0;
-
 }
 </style>
