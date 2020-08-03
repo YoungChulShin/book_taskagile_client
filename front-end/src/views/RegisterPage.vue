@@ -2,10 +2,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="register-form">
-        <div class="logo-wrapper">
-          <img class="logo" src="/static/images/logo.png" alt="logo image"/>
-          <div class="tagline">Open source task management tool</div>
-        </div>
+        <Logo/>
         <form @submit.prevent="submitForm">
           <div v-show="errorMessage" class="alert alert-danger failed">{{errorMessage}}</div>
           <div class="form-group">
@@ -24,19 +21,16 @@
         </form>
       </div>
     </div>
-    <div class="footer">
-      <span class="copyright">&copy; 2018 TaskAgile.com</span>
-      <ul class="footer-links list-inline float-right">
-        <li class="list-inline-item"><a href="#">About</a></li>
-        <li class="list-inline-item"><a href="#">Terms of Service</a></li>
-        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-        <li class="list-inline-item"><a href="https://github.com/taskagile/vuejs.spring-boot.mysql" target="_blank">GitHub</a></li>
-      </ul>
-    </div>
+    <PageFooter/>
   </div>
 </template>
 
 <script>
+
+import Logo from '@/components/Logo'
+import PageFooter from '@/components/PageFooter'
+import registrationService from '@/services/registration'
+
 export default {
   name: 'RegisterPage',
   data: function () {
@@ -45,8 +39,23 @@ export default {
         username: '',
         emailAddress: '',
         password: ''
-      }
+      },
+      errorMessage: ''
     }
+  },
+  methods: {
+    submitForm () {
+      registrationService.register(this.form).then(() => {
+        this.$router.push({ name: 'LoginPage' })
+      }).catch((error) => {
+        this.errorMessage = 'Failed to register user. Reason: ' +
+          (error.message ? error.message : 'Unknown') + '.'
+      })
+    }
+  },
+  components: {
+    Logo,
+    PageFooter
   }
 }
 </script>
@@ -59,12 +68,5 @@ export default {
     margin-top: 50px;
     max-width: 320px;
 }
-.logo-wrapper {
-    margin-bottom: 40px;
-}
-.footer {
-    width: 100%;
-    line-height: 40px;
-    margin-top: 50px;
-}
+
 </style>
